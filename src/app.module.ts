@@ -1,11 +1,21 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import {DatabaseModule} from './database/database.module'
+import {RedisModule} from './redis/redis.module';
+import {TypeOrmModule} from "@nestjs/typeorm";
+import { User } from './user/user.entity';
 @Module({
-  imports: [UserModule,DatabaseModule],
+  imports: [UserModule,RedisModule, TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'dhruv',
+      database: 'testdb',
+      entities: [User],
+    }),],
   controllers: [AppController],
   providers: [AppService],
 })
