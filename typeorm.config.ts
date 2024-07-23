@@ -9,14 +9,15 @@ config();
 const isMigrationsBuilt = fs.existsSync('./dist/src/migration');
 const migrationsPath = isMigrationsBuilt ? 'dist/src/migration/*.js' : 'src/migration/*.ts';
 
+const confg = new ConfigService();
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  host: 'localhost',
+  host: confg.get("DB_HOST")||'localhost',
   port: 5433,
-  database: 'testdb',
+  database: confg.get("POSTGRES_DB")||'testdb',
   username: 'postgres',
-  password: 'dhruv',
+  password: confg.get("PROSTGRES_PASSWORD")||'dhruv',
   entities: [path.join(__dirname, '**/src/*/*.entity{.ts,.js}')],
   migrations: [migrationsPath],
   synchronize:true
