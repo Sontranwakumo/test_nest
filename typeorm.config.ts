@@ -1,12 +1,14 @@
-import { DataSource } from 'typeorm';
+import { DataSource, Db } from 'typeorm';
 import { config } from 'dotenv';
 import * as path from 'path';
 import * as fs from 'fs';
+import { ConfigService } from '@nestjs/config';
 
 config();
 
 const isMigrationsBuilt = fs.existsSync('./dist/src/migration');
 const migrationsPath = isMigrationsBuilt ? 'dist/src/migration/*.js' : 'src/migration/*.ts';
+
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
