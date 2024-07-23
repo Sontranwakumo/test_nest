@@ -1,22 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import {DatabaseModule} from './database/database.module'
+import {AppDataSource} from '../typeorm.config'
 import {RedisModule} from './redis/redis.module';
 import {TypeOrmModule} from "@nestjs/typeorm";
-import { User } from './user/user.entity';
+import { ItemsModule } from './items/items.module';
 @Module({
-  imports: [UserModule,RedisModule, TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'tobi',
-      password: 'nestjs_db',
-      database: 'nestjs_db_test',
-      entities: [User],
-    }),],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [UserModule,RedisModule, TypeOrmModule.forRoot(AppDataSource.options), ItemsModule],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

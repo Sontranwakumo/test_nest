@@ -6,13 +6,19 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Get()
-    findbyid(@Query('id') id:string) {
-      return this.userService.getUser(id);
+    handleRequest(@Query('id') id?: string, @Query('del') del?: string) {
+      if (id) {
+        return this.userService.getUser(id);
+      } else if (del) {
+        return this.userService.deleteUser(del);
+      } else {
+        return this.userService.getAllUser();
+      }
     }
+
     @Post()
     async set(@Body() createUserDto: CreateUserDto ){
       const result = await this.userService.createUser(createUserDto.name, createUserDto.email);
-      this.userService.createUser(result.id.toString(),JSON.stringify(result));
       return result;
     }
 

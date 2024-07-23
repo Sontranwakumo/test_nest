@@ -5,15 +5,17 @@ import * as fs from 'fs';
 
 config();
 
-const isMigrationsBuilt = fs.existsSync('./dist/src/migrations');
-const migrationsPath = isMigrationsBuilt ? 'dist/src/migrations/*.js' : 'src/migrations/*.ts';
+const isMigrationsBuilt = fs.existsSync('./dist/src/migration');
+const migrationsPath = isMigrationsBuilt ? 'dist/src/migration/*.js' : 'src/migration/*.ts';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
-  port: 5432,
-  database: 'nestjs_db',
-  username: 'tobi',
+  port: 5433,
+  database: 'testdb',
+  username: 'postgres',
+  password: 'dhruv',
   entities: [path.join(__dirname, '**/src/*/*.entity{.ts,.js}')],
   migrations: [migrationsPath],
+  synchronize:true
 });
