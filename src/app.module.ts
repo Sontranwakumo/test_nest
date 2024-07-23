@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 @Module({
   imports:[
-    UserModule,  
+    // UserModule,  
     RedisModule, 
     ConfigModule.forRoot({ isGlobal: true }),
     ItemsModule,
