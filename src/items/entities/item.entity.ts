@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import { Listing } from "./listing.entity";
 
 
 @Entity()
@@ -9,6 +10,10 @@ export class Item {
     name: string;
     @Column({default:true})
     public: boolean;
+
+    @OneToOne(()=>Listing)
+    @JoinColumn()
+    
     constructor(item: Partial<Item>){
         Object.assign(this,item);
     }

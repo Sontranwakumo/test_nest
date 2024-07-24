@@ -2,9 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigSource } from '@nestjs/microservices/external/kafka.interface';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {ConfigService} from '@nestjs/config';
-
-import path from 'path';
-import { AppDataSource } from 'typeorm.config';
+    
 
 @Module({
     imports:[
