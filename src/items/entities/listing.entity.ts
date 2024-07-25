@@ -1,12 +1,10 @@
+import { AbstractEntity } from "src/database/abstract.entity";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Listing{
-    @PrimaryGeneratedColumn()
-    id: number;
-    @Column()
-    desc:string;
-    @Column()
-    rating:number;
-    
+export class Listing extends AbstractEntity<Listing>{
+    @Column({nullable:false})
+    description?:string;
+    @Column({nullable:false})
+    rating?:number;
 }

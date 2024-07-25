@@ -1,20 +1,21 @@
-import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import { Listing } from "./listing.entity";
+import { ItemComment } from "./comment.entity";
+import { AbstractEntity } from "src/database/abstract.entity";
 
 
 @Entity()
-export class Item {
-    @PrimaryGeneratedColumn()
-    id: number;
+export class Item extends AbstractEntity<Item>{
     @Column()
     name: string;
     @Column({default:true})
     public: boolean;
 
-    @OneToOne(()=>Listing)
+    @OneToOne(()=>Listing,{cascade:true})
     @JoinColumn()
-    
-    constructor(item: Partial<Item>){
-        Object.assign(this,item);
-    }
+    listing: Listing;
+
+    @OneToMany(()=>ItemComment,(comment)=>comment.item,{cascade:true})
+    comments:ItemComment[]
+
 }
