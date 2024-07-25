@@ -19,7 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "migration:run": "npm run typeorm -- migration:run -d typeorm.config.ts",
+    "migrate:gen": "./node_modules/.bin/typeorm migration:generate -d ./typeorm.config.ts ./src/migration/CreateUser",
+    "migrate:up": "./node_modules/.bin/typeorm migration:run -d ./dist/db/data-source-config.js",
+    "migrate:down": "./node_modules/.bin/typeorm migration:revert -d ./dist/db/data-source-config.js",
     "db:migrate:up": "npm run typeorm -- -d ./typeorm.config.ts migration:run"
   },
   "dependencies": {

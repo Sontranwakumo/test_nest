@@ -18,7 +18,6 @@ export const AppDataSource = new DataSource({
   database: confg.get("POSTGRES_DB")||'testdb',
   username: 'postgres',
   password: confg.get("PROSTGRES_PASSWORD")||'dhruv',
-  entities: [path.join(__dirname, '**/src/*/*.entity{.ts,.js}')],
-  migrations: [migrationsPath],
-  synchronize:true
+  entities: [path.join(__dirname, '**/src/*/*.entity{.ts,.js}'),path.join(__dirname, '**/src/*/entities/*.entity{.ts,.js}')],
+  migrations: [migrationsPath]
 });
